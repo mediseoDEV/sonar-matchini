@@ -28,7 +28,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/img', express.static('public/images'));
 app.use('/user', userRoutes);
 app.use('/matche', matcheSchema);
-app.use();
+
 app.listen(port, () => {
   console.log(`Server running at http:${port}/`);                                                       
 });
