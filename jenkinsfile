@@ -38,7 +38,7 @@ pipeline {
                     script {
                         def scannerHome = tool name: 'SONAR_SCANER', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
                         withEnv(["PATH+JDK=${env.JAVA_HOME}/bin:${env.PATH}"]) {
-                            sh "${scannerHome}/sonar-scanner -Dsonar.login=sqa_5819c0b9106fc11a111f8aadefff70940c5726ec -Dsonar.project.settings=/var/lib/jenkins/workspace/sonarQubeMatchini/sonar-project.properties"
+                            sh "${scannerHome} sonar-scanner -Dsonar.login=sqa_5819c0b9106fc11a111f8aadefff70940c5726ec -Dsonar.project.settings=/var/lib/jenkins/workspace/sonarQubeMatchini/sonar-project.properties"
                         }
                     }
     }
