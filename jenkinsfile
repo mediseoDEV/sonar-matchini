@@ -1,0 +1,37 @@
+pipeline {
+    agent any
+    stages {
+        stage('first test') {
+            steps {
+                echo 'first test'
+            }
+        }
+
+               stage('Checkout from GitHub') {
+                   steps {
+                       script {
+                           // Cloner le référentiel GitHub en spécifiant l'URL
+                           checkout([$class: 'GitSCM', branches: [[name: 'sonar-matchini']], userRemoteConfigs: [[url: 'https://github.com/mediseoDEV/sonar-matchini']]])
+                       }
+                   }
+               }
+
+            stage('npm install') {
+                  steps {
+
+                     sh 'cd /var/lib/jenkins/workspace/sonarQubeMatchini && npm install'
+                  }
+              }
+
+              stage('npm SONARQUBE') {
+                  steps {
+                      script {
+
+                          sh 'cd /var/lib/jenkins/workspace/sonarQubeMatchini/ sonar-scanner -Dsonar.login=sqa_5819c0b9106fc11a111f8aadefff70940c5726ec'
+                      }
+                  }
+              }
+
+                      
+    }
+}
