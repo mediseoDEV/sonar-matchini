@@ -12,12 +12,11 @@ const hostname = '192.168.1.12';
 mongoose.set('debug', true);
 mongoose.Promise = global.Promise;
 mongoose
-.connect("mongodb://mongo:8edAyVsYPuFcDWoMZtwj@containers-us-west-186.railway.app:7075")  .then(() => {
-    console.log(`Connected to ${databaseName}`);
-  })
+.connect(`mongodb://127.0.0.1:27017/${databaseName}`)
 .then(() => {
     console.log(`Connected to ${databaseName}`);
   })
+
   .catch(err => {
     console.log(err);
   });
@@ -32,3 +31,4 @@ app.use('/matche', matcheSchema);
 app.listen(port, () => {
   console.log(`Server running at http:${port}/`);                                                       
 });
+export default app;
