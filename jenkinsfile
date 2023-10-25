@@ -25,14 +25,24 @@ pipeline {
                   }
               }
 
-              stage('npm SONARQUBE') {
-                  steps {
-                      script {
-                            sh 'sonar-scanner -Dsonar.login=sqa_5819c0b9106fc11a111f8aadefff70940c5726ec -Dsonar.project.settings=/var/lib/jenkins/workspace/sonarQubeMatchini/sonar-project.properties'
+            //   stage('npm SONARQUBE') {
+            //       steps {
+            //           script {
+            //                 sh 'sonar-scanner -Dsonar.login=sqa_5819c0b9106fc11a111f8aadefff70940c5726ec -Dsonar.project.settings=/var/lib/jenkins/workspace/sonarQubeMatchini/sonar-project.properties'
 
-                      }
-                  }
-              }
+            //           }
+            //       }
+            //   }
+                        stage('npm SONARQUBE') {
+                         steps {
+                    script {
+                        def scannerHome = tool name: 'YourSonarScannerToolName', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+                        withEnv(["PATH+JDK=${env.JAVA_HOME}/bin:${env.PATH}"]) {
+                            sh "${scannerHome}/bin/sonar-scanner -Dsonar.login=sqa_5819c0b9106fc11a111f8aadefff70940c5726ec -Dsonar.project.settings=/var/lib/jenkins/workspace/sonarQubeMatchini/sonar-project.properties"
+                        }
+                    }
+    }
+}
 
                       
     }
